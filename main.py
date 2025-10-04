@@ -23,7 +23,7 @@ def get_book_text(file_path):
 		return None
 
 
-from stats import get_num_words
+from stats import get_num_words, char_frequencies, sort_char_counts
 
 
 def main():
@@ -32,7 +32,23 @@ def main():
 	if text is None:
 		return
 	count = get_num_words(text)
+	#print(f"Found {count} total words")
+
+	chars = char_frequencies(text)
+	sorted_chars = sort_char_counts(chars)
+
+	# Print the formatted report
+	print("============ BOOKBOT ============")
+	print(f"Analyzing book found at {book_path}...")
+	print("----------- Word Count ----------")
 	print(f"Found {count} total words")
+	print("--------- Character Count -------")
+	# sorted_chars is list of dicts {"char": c, "num": n}
+	for entry in sorted_chars:
+		ch = entry["char"]
+		n = entry["num"]
+		print(f"{ch}: {n}")
+	print("============= END ===============")
 
 
 # ...count_words moved to stats.py as get_num_words
