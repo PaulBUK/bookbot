@@ -34,3 +34,11 @@ def test_unicode_error(tmp_path):
     b = tmp_path / "binary.dat"
     b.write_bytes(b"\xff\xff\xff\xff\xff")
     assert get_book_text(str(b)) is None
+
+
+def test_count_words():
+    from stats import get_num_words
+    assert get_num_words("") == 0
+    assert get_num_words("one") == 1
+    assert get_num_words("one two three") == 3
+    assert get_num_words("  spaced\nlines\tand tabs ") == 4

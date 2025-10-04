@@ -23,10 +23,19 @@ def get_book_text(file_path):
 		return None
 
 
+from stats import get_num_words
+
+
 def main():
 	book_path = "books/frankenstein.txt"
 	text = get_book_text(book_path)
-	print(text)
+	if text is None:
+		return
+	count = get_num_words(text)
+	print(f"Found {count} total words")
+
+
+# ...count_words moved to stats.py as get_num_words
 
 
 if __name__ == "__main__":
