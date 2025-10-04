@@ -18,16 +18,23 @@ def get_book_text(file_path):
 	except IsADirectoryError:
 		print(f"Error: '{file_path}' is a directory, not a file. Provide a path to a file to read.")
 		return None
-	except OSError as e:
-		print(f"Error: an OS error occurred while opening '{file_path}': {e}")
+	except Exception as e:
+		print(f"Error: an error occurred while opening '{file_path}': {e}")
 		return None
 
+
+import sys
 
 from stats import get_num_words, char_frequencies, sort_char_counts
 
 
 def main():
-	book_path = "books/frankenstein.txt"
+	# Expect the book path as the second command-line argument
+	if len(sys.argv) != 2:
+		print("Usage: python3 main.py <path_to_book>")
+		sys.exit(1)
+
+	book_path = sys.argv[1]
 	text = get_book_text(book_path)
 	if text is None:
 		return
